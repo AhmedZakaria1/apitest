@@ -7,7 +7,8 @@ git clone https://github.com/AhmedZakaria1/apitest.git
 
 3. Once repository is cloned, it can be imported as a gradle project in any of IDE's or can be run directly from command line.
 
-4. The test is written as a JUnit class.
+4. The test is written as a JUnit class.The test basically checks the output (json response) from a url and validates three aspects.
+Please refer the comments in  JUnit test APITest for details of validation criteria.
 
 5. From the directory where you cloned,cd to project root folder  (cd apitest)
 
