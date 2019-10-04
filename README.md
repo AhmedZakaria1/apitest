@@ -11,7 +11,7 @@ git clone https://github.com/AhmedZakaria1/apitest.git
 
 5. From the directory where you cloned,cd to project root folder  (cd apitest)
 
-6. In windows/linux , assuming you have gradle and java installed , run below command to compile, resolve dependencies and running the JUnit test. Note: The test needs to be run in public network as proxy could be set in private/VPN networks and test would fail.
+6. In windows/linux , assuming you have gradle and java installed , run below command to compile, resolve dependencies and execute the JUnit test. Note: The test needs to be run in public network as proxy could be set in private/VPN networks and test would fail as the code doesn't currently support proxy settings. 
 
 Command : gradle test --tests APITest
 
