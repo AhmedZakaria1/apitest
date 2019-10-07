@@ -1,4 +1,5 @@
 ## Please follow the below steps to set up and run the test.
+## The project is gradle based.
 
 1. As prerequisite, make sure you have git,java and gradle installed on your machine. e.g java version "1.8.0_221" , Gradle 5.4.1 ,git version 2.16.2.windows.1
 
