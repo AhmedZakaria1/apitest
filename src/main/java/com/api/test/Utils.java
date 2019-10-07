@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,10 +15,14 @@ public class Utils {
 	Map<String, Object> treeMap = null;
 
 	public Map<String, Object> mapForJson(String json) {
+		/*
+		 * This method returns a map with String as key and Object as value that can be
+		 * case to respective data type. jackson lib's ObjectMapper is used to convert
+		 * input String json data to map
+		 */
 		try {
 			mapper = new ObjectMapper();
 			treeMap = mapper.readValue(json, Map.class);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -28,11 +30,18 @@ public class Utils {
 	}
 
 	public String jsonResponseAsString(String url) {
+		/*
+		 * This method returns json response as String making a GET request from
+		 * provided url
+		 */
 		StringBuffer response = null;
 		try {
 			obj = new URL(url);
 			connection = (HttpURLConnection) obj.openConnection();
 			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Accept", "application/json");
+			connection.addRequestProperty("User-Agent",
+					"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0");
 			connection.connect();
 			int responseCode = connection.getResponseCode();
 			if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -52,23 +61,9 @@ public class Utils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			connection.disconnect();
+			if (connection != null)
+				connection.disconnect();
 		}
 		return response.toString();
-	}
-
-	private void findKeys(Map<String, Object> treeMap, Map<String, Object> propsmap, Logger logger) {
-		treeMap.forEach((key, value) -> {
-			if (value instanceof LinkedHashMap) {
-				Map<String, Object> map = (LinkedHashMap) value;
-				String effkey = key;
-				findKeys(map, propsmap, logger);
-			} else {
-				String finalkey = key;
-				propsmap.putIfAbsent(finalkey, value);
-			}
-
-		});
-
 	}
 }

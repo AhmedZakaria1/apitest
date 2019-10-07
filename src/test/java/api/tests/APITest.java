@@ -51,14 +51,15 @@ public class APITest {
 		boolean canRelist = (boolean) jsonPropertiesMap.get("CanRelist");
 		sa.assertEquals(canRelist, true);
 
-		// Test whether Promotions element with Name = "Gallery" has a Description that
-		// contains the text "2x larger image"
-		// Promotions key in response holds array of maps as value, we will check the
-		// same for validating given criteria
+		/*
+		 * Test whether Promotions element with Name = "Gallery" has a Description that
+		 * contains the text "2x larger image" Promotions key in response holds array of
+		 * maps as value, we will check the same for validating given criteria
+		 */
 		ArrayList<Map<String, String>> listOfMaps = (ArrayList<Map<String, String>>) jsonPropertiesMap
 				.get("Promotions");
 		int checkAllConditions = 0;
-		for (Map<String, String> map : listOfMaps) {
+		promotions_key: for (Map<String, String> map : listOfMaps) {
 			for (Map.Entry ent : map.entrySet()) {
 				if (ent.getKey().equals("Name") && ent.getValue().equals("Gallery")) {
 					checkAllConditions++;
@@ -66,9 +67,12 @@ public class APITest {
 				if (ent.getKey().equals("Description") && ent.getValue().toString().contains("2x larger image")) {
 					checkAllConditions++;
 				}
+				// In the same map, if we meet both criteria, the check is pass
+				if (checkAllConditions == 2) {
+					break promotions_key;
+				}
 			}
-			if (checkAllConditions == 2)
-				break;
+			checkAllConditions = 0;
 		}
 		sa.assertEquals(checkAllConditions, 2);
 		sa.assertAll();

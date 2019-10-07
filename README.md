@@ -12,15 +12,15 @@ Please refer the comments in  JUnit test APITest for details of validation crite
 
 5. From the directory where you cloned,cd to project root folder  (cd apitest)
 
-6. In windows/linux , assuming you have gradle and java installed , run below command to compile, resolve dependencies and execute the JUnit test. Note: The test needs to be run in public network as proxy could be set in private/VPN networks and test would fail as the code doesn't currently support proxy settings. 
+6. On windows/linux , assuming you have gradle and java installed , run below command to compile, resolve dependencies and execute the JUnit test. Note: The test may not run in private/VPN networks as the request could time out due to proxy settings.In such cases, use public network to run the test. 
 
 Command : gradle test --tests APITest
 
-7. The test results can be checked under 
-<clonedDir>\apitest\build\reports
-<clonedDir>\apitest\build\test-results
+7. The test results that get generated can be checked under 
+<clonedDir>\apitest\build\reports\tests\test\index.html
+<clonedDir>\apitest\build\test-results\test\TEST-api.tests.APITest.xml
 
 Information about source code.
 The JUnit test APITest is under package api.tests.
-The utilities have been written in Utils class in package com.api.test
+The utilities have been written in Utils class in package com.api.test.Third party library jackson has been used to parse json.
 
